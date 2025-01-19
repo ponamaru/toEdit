@@ -1851,7 +1851,7 @@ Promise.all(promises).then(() => {
       link.click();
     });
 });  
-
+});  
 
 addEventListener( "keyup", n6keyF);
 addEventListener( "keydown", UIview);
