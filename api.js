@@ -1821,7 +1821,6 @@ zip.file("tomod.html",blob4);
 
 const imageUrls = [enemyIc[0],enemyIc[1],enemyIc[2],crI[0],crI[1],crI[2],crI[3],bgmT[1]];
 
-const zip = new JSZip();
 const imagesFolder = "images"; 
 let folder = zip.folder(imagesFolder); 
 let promises = [];
