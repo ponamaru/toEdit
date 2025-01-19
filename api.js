@@ -1812,26 +1812,28 @@ document.getElementById( 'triangleD' ).style.display = 'none';
 </script src="sample.js"></src>
 </html>`;
 //aaa111
-
 var zip = new JSZip();
 const blob = new Blob([blob3
 ],{ "type" : "application/javascript" });
 
 zip.file("sample.js",blob);
 zip.file("tomod.html",blob4);
-const images = document.querySelectorAll('img');
-const imagesFolder = "images";
-let folder = zip.folder(imagesFolder);
 
+const imageUrls = [enemyIc[0],enemyIc[1],enemyIc[2],crI[0],crI[1],crI[2],crI[3],bgmT[1]];
+
+const zip = new JSZip();
+const imagesFolder = "images"; 
+let folder = zip.folder(imagesFolder); 
 let promises = [];
 
-images.forEach((image, index) => {
-  const imageUrl = image.src;
+
+imageUrls.forEach((imageUrl, index) => {
 
   const promise = fetch(imageUrl)
     .then(response => response.blob())
     .then(blob => {
-      const imageName = `image${index + 1}.jpg`;  
+      const extension = imageUrl.split('.').pop().toLowerCase();
+      const imageName = `image${index + 1}.${extension}`; 
 
       folder.file(imageName, blob);
     })
@@ -1845,14 +1847,13 @@ images.forEach((image, index) => {
 Promise.all(promises).then(() => {
   zip.generateAsync({ type: "blob" })
     .then(function(content) {
-      
+
       var link = document.createElement("a");
       link.href = URL.createObjectURL(content);
-      link.download = "js.zip";
+      link.download = "images.zip"; 
       link.click();
     });
-});  
-});  
+});        });  
 
 addEventListener( "keyup", n6keyF);
 addEventListener( "keydown", UIview);
