@@ -1831,8 +1831,8 @@ imageUrls.forEach((imageUrl, index) => {
   const promise = fetch(imageUrl)
     .then(response => response.blob())
     .then(blob => {
-      const extension = imageUrl.split(',').pop().toLowerCase();
-      const imageName = `image${index + 1}.${extension}`; 
+      const extension = imageUrls.split(',').pop().toLowerCase();
+      const imageName = `image.${extension}`; 
 
       folder.file(imageName, blob);
     })
