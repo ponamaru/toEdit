@@ -152,12 +152,7 @@ let key = 0;
                 fileReader.onload = ((e)=> {
                     document.getElementById('enemy1').src = e.target.result;
 enemyIc[0] = e.target.result;
-  const zip = new JSZip();
-  const folder = zip.folder("images");
-  const files = document.getElementById('fileInput').files;
-      const blob5 = event.target.result;
-      const imageName = `image${index + 1}.${file.name.split('.').pop()}`;
-      folder.file(imageName, blob5, { type: file.type });
+images[0] = e.target.result;
                 });
                 fileReader.readAsDataURL(obj.files[i]);
             }
@@ -168,6 +163,7 @@ enemyIc[0] = e.target.result;
                 fileReader.onload = ((e)=> {
                     document.getElementById('enemy2').src = e.target.result;
 enemyIc[1] = e.target.result;
+images[1] = e.target.result;
                 });
                 fileReader.readAsDataURL(obj.files[i]);
             }
@@ -178,6 +174,7 @@ enemyIc[1] = e.target.result;
                 fileReader.onload = ((e)=> {
                     document.getElementById('enemy3').src = e.target.result;
 enemyIc[2] = e.target.result;
+images[2] = e.target.result;
                 });
                 fileReader.readAsDataURL(obj.files[i]);
             }
@@ -187,6 +184,7 @@ enemyIc[2] = e.target.result;
                 let fileReader = new FileReader();
                 fileReader.onload = ((e)=> {
                     crI[0] = e.target.result;
+			images[3] = e.target.result;
                 });
                 fileReader.readAsDataURL(obj.files[i]);
             }
@@ -196,6 +194,7 @@ enemyIc[2] = e.target.result;
                 let fileReader = new FileReader();
                 fileReader.onload = ((e)=> {
                     crI[1] = e.target.result;
+			images[4] = e.target.result;
                 });
                 fileReader.readAsDataURL(obj.files[i]);
             }
@@ -204,7 +203,7 @@ enemyIc[2] = e.target.result;
             for (i = 0; i < obj.files.length; i++) {
                 let fileReader = new FileReader();
                 fileReader.onload = ((e)=> {
-                    crI[2] = e.target.result;
+                    crI[5] = e.target.result;
                 });
                 fileReader.readAsDataURL(obj.files[i]);
             }
@@ -213,7 +212,7 @@ enemyIc[2] = e.target.result;
             for (i = 0; i < obj.files.length; i++) {
                 let fileReader = new FileReader();
                 fileReader.onload = ((e)=> {
-                    crI[3] = e.target.result;
+                    crI[6] = e.target.result;
                 });
                 fileReader.readAsDataURL(obj.files[i]);
             }
@@ -275,6 +274,7 @@ function Cback(obj) {
         document.body.style.backgroundImage = `url(${e.target.result})`;
 
         bgmT[1] = obj.files[0].name;
+	    images[8] = e.target.result;
     };
 
     fileReader.readAsDataURL(obj.files[0]);
