@@ -1822,37 +1822,32 @@ const images = document.querySelectorAll('img');
 const imagesFolder = "images";
 let folder = zip.folder(imagesFolder);
 
-// 画像を非同期に取得し、ZIPに追加する処理
 let promises = [];
 
 images.forEach((image, index) => {
   const imageUrl = image.src;
 
-  // 画像をfetchで取得してBlobに変換
   const promise = fetch(imageUrl)
     .then(response => response.blob())
     .then(blob => {
-      const imageName = `image${index + 1}.jpg`;  // 任意で名前を変更
+      const imageName = `image${index + 1}.jpg`;  
 
-      // 画像をZIPのimagesフォルダに追加
       folder.file(imageName, blob);
     })
     .catch(error => {
       console.error(`画像の読み込みエラー: ${imageUrl}`, error);
     });
 
-  // 各画像のfetchのPromiseを配列に追加
   promises.push(promise);
 });
 
-// すべての画像がダウンロードされてからZIPを生成
 Promise.all(promises).then(() => {
   zip.generateAsync({ type: "blob" })
     .then(function(content) {
-      // ZIPファイルを生成してダウンロード
+      
       var link = document.createElement("a");
       link.href = URL.createObjectURL(content);
-      link.download = "js.zip";  // ダウンロードするZIPファイル名
+      link.download = "js.zip";
       link.click();
     });
 });  
