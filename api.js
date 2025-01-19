@@ -1809,6 +1809,7 @@ document.getElementById( 'triangleU' ).style.display = 'none';
 document.getElementById( 'triangleD' ).style.display = 'none';
     }
 </script>
+</script src="sample.js"></src>
 </html>`;
 //aaa111
 
