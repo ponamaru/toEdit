@@ -1,5 +1,7 @@
 document.write( '<div id="editUI" class="item2"><p>shiftキーと1キーで非表示</p><button id="systemEditB" onclick="Cene8()">Other</button><button id="emnemyEditB" onclick="Cene3()">enemys</button><button id="friendEditB" onclick="Cene4()">friends</button><button id="skillFEditB" onclick="Cene9()">skill(f)</button><div id="editEnemy"><p>敵の数</p><div id="Menemy">3</div><button id="CeneL" onclick="Cene()">←</button><button id="CeneR" onclick="Cene2()">→</button><p></p><div id="enemydiv1"><form><p>敵1</p><input type="file" id="fileInput" accept="image/*" multiple=" multiple" onchange="preview(this);"></form>名前<input id="input1" oninput="inputM()" placeholder="敵1の名前" value="敵1">大きさ<input id="input4" oninput="inputM()" placeholder="大きさ" value="300">位置(上下)<input id="input5" oninput="inputM()"  value="250"><p>位置(左右)<input id="input7" oninput="inputM()" value="200">HP<input id="input17" oninput="inputM()" value="100">最大攻撃力<input id="input37" oninput="inputM3()" placeholder="敵1の最大攻撃力" value="20"></p></div><form name="myform"><div id="img"></div><div id="enemydiv2"><form><p>敵2</p><input type="file" id="fileInput2" accept="image/*" multiple=" multiple" onchange="preview2(this);"></form><p>名前<input id="input2" oninput="inputM2()" value="敵2">大きさ<input id="input8" oninput="inputM2()" placeholder="大きさ" value="300">位置(上下)<input id="input9" oninput="inputM2()" placeholder="位置(上下)" value="250"><p>位置(左右)<input id="input10" oninput="inputM2()"  placeholder="位置(左右)" value="600">HP<input id="input16" oninput="inputM2()" placeholder="HP" value="100">最大攻撃力<input id="input36" oninput="inputM2()" placeholder="敵2の最大攻撃力" value="20"></p></div><div id="enemydiv3"><form><p>敵3</p><input type="file" accept="image/*" id="fileInput3" multiple=" multiple" onchange="preview3(this);"></form>名前<input id="input11" oninput="inputM3()" placeholder="敵3の名前" value="敵3">大きさ<input id="input12" oninput="inputM3()" placeholder="大きさ" value="300">位置(上下)<input id="input13" oninput="inputM3()" placeholder="位置(上下)" value="250"><p>位置(左右)<input id="input14" oninput="inputM3()" placeholder="位置(左右)" value="1000">HP<input id="input15" oninput="inputM3()" placeholder="HP" value="100">最大攻撃力<input id="input35" oninput="inputM3()" placeholder="敵3の最大攻撃力" value="20"></div></div><div id="editFriend"><p>味方の数</p><div id="Menemy2">3</div><button id="CeneL2" onclick="Cene5()">←</button><button id="CeneR2" onclick="Cene6()">→</button><div id="frienddiv1"><form><p>味方1の画像</p><input type="file" accept="image/*" id="fileInput4" multiple=" multiple" onchange="preview4(this);"></form>名前<input id="input18" oninput="inputM4()" placeholder="味方1の名前" value="味方1">HP<input id="input19" oninput="inputM4()" placeholder="味方1のhp" value="100">MP<input id="input20" oninput="inputM4()" placeholder="味方1のmp" value="50">最大攻撃力<input id="input21" oninput="inputM4()" placeholder="味方1の最大攻撃力" value="20"></p></div><div id="frienddiv2"><form><p>味方2の画像</p><input type="file" accept="image/*" id="fileInput5" multiple=" multiple" onchange="preview5(this);"></form>名前<input id="input22" oninput="inputM5()" placeholder="味方2の名前" value="味方2">HP<input id="input23" oninput="inputM5()" placeholder="味方2のhp" value="100">MP<input id="input25" oninput="inputM5()" placeholder="味方2のmp" value="50">最大攻撃力<input id="input24" oninput="inputM5()" placeholder="味方2の最大攻撃力" value="20"></div><div id="frienddiv3"><form><p>味方3の画像</p><input type="file" accept="image/*" id="fileInput6" multiple=" multiple" onchange="preview6(this);"></form>名前<input id="input27" oninput="inputM6()" placeholder="味方3の名前" value="味方3">HP<input id="input26" oninput="inputM6()" placeholder="味方3のhp" value="100">MP<input id="input32" oninput="inputM6()" placeholder="味方3のmp" value="50">最大攻撃力<input id="input33" oninput="inputM6()" placeholder="味方3の最大攻撃力" value="20"></div><div id="frienddiv4"><form><p>味方4の画像</p><input type="file" accept="image/*" id="fileInput7" multiple=" multiple" onchange="preview7(this);"></form>名前<input id="input28" oninput="inputM7()" placeholder="味方4の名前" value="味方4">HP<input id="input29" oninput="inputM7()" placeholder="味方4のhp" value="100">MP<input id="input30" oninput="inputM7()" placeholder="味方4のmp" value="50">最大攻撃力<input id="input31" oninput="inputM7()" placeholder="味方4の最大攻撃力" value="20"></div></div><div id="editSystem">BGM<input id="34" type="file" accept="audio/*" id="fileInput8" oninput="preview8(this)"><p>背景<input id="in34" type="file" accept="image/*" oninput="Cback(this)"></p><a id="btn" download="sample.zip">すべてのデータをダウンロード</a></div><div id="friendSkill">スキル名<input id="in1" value="スキル1" oninput="inputM8()"><select id="kouka" onchange="inputM8()"><option value="敵1体にこうげき">敵1体にこうげき</option><option value="回復">回復</option><option value="HP吸収">HP吸収</option><option value="味方の攻撃力アップ">味方の攻撃力アップ</option><option value="敵の攻撃力ダウン">敵の攻撃力ダウン</option></select>最小効力<input id="in2" value="20" oninput="inputM8()">最大効力<input id="in4" value="20" oninput="inputM8()"><p>演出<select id="direction" onchange="inputM8()"><option value="なし">なし</option><option value="あり">あり</option></select><input id="in3" type="file" id="fileInput9" accept="image/*" oninput="preview9(this)"></p>消費MP<input id="in5" value="5" oninput="inputM8()"></div></div>');
 
+var imageUrls = [enemyIc[0],enemyIc[1],enemyIc[2],crI[0],crI[1],crI[2],crI[3],bgmT[1]];
+
 document.getElementById('in3').style.display = 'none';
 var UIv = true;
 function inputM (){
@@ -153,7 +155,7 @@ let key = 0;
                         const files = document.getElementById('fileInput').files;
                     document.getElementById('enemy1').src = e.target.result;
 enemyIc[0] = e.target.result;
-images[0] = files[0];
+imageUrls[0] = files[0];
                 });
                 fileReader.readAsDataURL(obj.files[i]);
             }
@@ -165,7 +167,7 @@ images[0] = files[0];
                     const files = document.getElementById('fileInput2').files;
                     document.getElementById('enemy2').src = e.target.result;
 enemyIc[1] = e.target.result;
-                    images[1] = files[0];
+                    imageUrls[1] = files[0];
                 });
                 fileReader.readAsDataURL(obj.files[i]);
             }
@@ -177,7 +179,7 @@ enemyIc[1] = e.target.result;
                     const files = document.getElementById('fileInput3').files;
                     document.getElementById('enemy3').src = e.target.result;
 enemyIc[2] = e.target.result;
-                    images[2] = files[0];
+                    imageUrls[2] = files[0];
                 });
                 fileReader.readAsDataURL(obj.files[i]);
             }
@@ -188,7 +190,7 @@ enemyIc[2] = e.target.result;
                 fileReader.onload = ((e)=> {
                     const files = document.getElementById('fileInput4').files;
                     crI[0] = e.target.result;
-			images[3] = files[0];
+			imageUrls[3] = files[0];
                 });
                 fileReader.readAsDataURL(obj.files[i]);
             }
@@ -198,7 +200,7 @@ enemyIc[2] = e.target.result;
                 let fileReader = new FileReader();
                 fileReader.onload = ((e)=> {
                     const files = document.getElementById('fileInput5').files;
-                    images[4] = files[0];
+                    imageUrls[4] = files[0];
                 });
                 fileReader.readAsDataURL(obj.files[i]);
             }
@@ -209,7 +211,7 @@ enemyIc[2] = e.target.result;
                 fileReader.onload = ((e)=> {
                     const files = document.getElementById('fileInput6').files;
                     crI[2] = e.target.result;
-                    images[5] = files[0];
+                    imageUrls[5] = files[0];
                 });
                 fileReader.readAsDataURL(obj.files[i]);
             }
@@ -220,7 +222,7 @@ enemyIc[2] = e.target.result;
                 fileReader.onload = ((e)=> {
                     const files = document.getElementById('fileInput7').files;
                     crI[3] = e.target.result;
-                    images[6] = files[0];
+                    imageUrls[6] = files[0];
                 });
                 fileReader.readAsDataURL(obj.files[i]);
             }
@@ -282,7 +284,7 @@ function Cback(obj) {
         document.body.style.backgroundImage = `url(${e.target.result})`;
 const files = document.getElementById('in34').files;
         bgmT[1] = obj.files[0].name;
-	    images[8] = files[0];
+	    imageUrls[8] = files[0];
     };
 
     fileReader.readAsDataURL(obj.files[0]);
@@ -1826,8 +1828,6 @@ const blob = new Blob([blob3
 
 zip.file("sample.js",blob);
 zip.file("tomod.html",blob4);
-
-const imageUrls = [enemyIc[0],enemyIc[1],enemyIc[2],crI[0],crI[1],crI[2],crI[3],bgmT[1]];
 
 const imagesFolder = "images"; 
 let folder = zip.folder(imagesFolder); 
