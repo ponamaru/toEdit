@@ -1833,6 +1833,7 @@ const imagesFolder = "images";
 let folder = zip.folder(imagesFolder); 
 let promises = [];
 
+    zip.file("tomod.png",enemyIc[0]);
 
 imageUrls.forEach((imageUrl, index) => {
 
