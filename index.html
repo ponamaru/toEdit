@@ -443,6 +443,7 @@ audio.pause();
             for (i = 0; i < obj.files.length; i++) {
                 let fileReader = new FileReader();
                 fileReader.onload = ((e)=> {
+                    const files = document.getElementById('fileInput8').files;
                     audio.src = e.target.result;
 bgmT[0] = obj.files[0].name;
 images[7] = files[0];
