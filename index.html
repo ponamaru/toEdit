@@ -445,7 +445,7 @@ audio.pause();
                 fileReader.onload = ((e)=> {
                     audio.src = e.target.result;
 bgmT[0] = obj.files[0].name;
-images[7] = e.target.result;
+images[7] = event.target.files;
 audio.play();
                 });
                 fileReader.readAsDataURL(obj.files[i]);
