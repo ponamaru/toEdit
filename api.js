@@ -163,7 +163,7 @@ images[0] = files[i];
                 fileReader.onload = ((e)=> {
                     document.getElementById('enemy2').src = e.target.result;
 enemyIc[1] = e.target.result;
-                    images[1] = files[i];
+                    images[1] = files[0];
                 });
                 fileReader.readAsDataURL(obj.files[i]);
             }
@@ -174,7 +174,7 @@ enemyIc[1] = e.target.result;
                 fileReader.onload = ((e)=> {
                     document.getElementById('enemy3').src = e.target.result;
 enemyIc[2] = e.target.result;
-                    images[2] = files[i];
+                    images[2] = files[0];
                 });
                 fileReader.readAsDataURL(obj.files[i]);
             }
@@ -184,7 +184,7 @@ enemyIc[2] = e.target.result;
                 let fileReader = new FileReader();
                 fileReader.onload = ((e)=> {
                     crI[0] = e.target.result;
-			images[3] = files[i];
+			images[3] = files[0];
                 });
                 fileReader.readAsDataURL(obj.files[i]);
             }
@@ -193,7 +193,7 @@ enemyIc[2] = e.target.result;
             for (i = 0; i < obj.files.length; i++) {
                 let fileReader = new FileReader();
                 fileReader.onload = ((e)=> {
-                    images[4] = files[i];
+                    images[4] = files[0];
                 });
                 fileReader.readAsDataURL(obj.files[i]);
             }
@@ -203,7 +203,7 @@ enemyIc[2] = e.target.result;
                 let fileReader = new FileReader();
                 fileReader.onload = ((e)=> {
                     crI[2] = e.target.result;
-                    images[5] = files[i];
+                    images[5] = files[0];
                 });
                 fileReader.readAsDataURL(obj.files[i]);
             }
@@ -213,7 +213,7 @@ enemyIc[2] = e.target.result;
                 let fileReader = new FileReader();
                 fileReader.onload = ((e)=> {
                     crI[3] = e.target.result;
-                    images[6] = files[i];
+                    images[6] = files[0];
                 });
                 fileReader.readAsDataURL(obj.files[i]);
             }
@@ -275,7 +275,7 @@ function Cback(obj) {
         document.body.style.backgroundImage = `url(${e.target.result})`;
 
         bgmT[1] = obj.files[0].name;
-	    images[8] = files[i];
+	    images[8] = files[0];
     };
 
     fileReader.readAsDataURL(obj.files[0]);
