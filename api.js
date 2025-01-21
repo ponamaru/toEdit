@@ -1833,24 +1833,12 @@ const imagesFolder = "images";
 let folder = zip.folder(imagesFolder); 
 let promises = [];
 
-    zip.file("tomod.png",imageUrls[0]);
+    
 
-imageUrls.forEach((imageUrl, index) => {
-
-  const promise = fetch(imageUrl)
-    .then(response => response.blob())
-    .then(blob => {
-      const extension = imageUrl.split(',').pop().toLowerCase();
-      const imageName = `image.${extension}`; 
-
-      folder.file(imageName, blob);
-    })
-    .catch(error => {
-      console.error(`画像の読み込みエラー: ${imageUrl}`, error);
-    });
-
-  promises.push(promise);
-});
+for (let i = 0; i < imageUrls.length; i++) {
+const imageName = `tomod${i}.png`;
+zip.file(imageName,imageUrls[i]);
+}
 
 Promise.all(promises).then(() => {
   zip.generateAsync({ type: "blob" })
