@@ -1866,20 +1866,6 @@ function addImagesToZip() {
             // 画像をZIPに追加
             const imageName = `tomod${index}.png`;  // ファイル名を指定
             zip.file(imageName, blob);
-
             count++;
-
-            // すべての画像を追加したらZIPファイルを生成
-            if (count === total) {
-              zip.generateAsync({ type: "blob" })
-                .then(function(content) {
-                  // ZIPファイルをダウンロード
-                  saveAs(content, "images.zip");
-                });
-            }
-          })
-          .catch(error => {
-            console.error('画像の取得に失敗しました:', error);
-          });
       });
     }
