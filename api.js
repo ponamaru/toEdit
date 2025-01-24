@@ -1850,23 +1850,8 @@ addEventListener( "keyup", n6keyF);
 addEventListener( "keydown", UIview);
 
 function addImagesToZip() {
-      let count = 0;
-      const total = imageUrls.length;
-
-      imageUrls.forEach((imageUrl, index) => {
-        // ローカルの画像ファイルを使う場合
-        fetch(imageUrl)
-          .then(response => {
-            if (!response.ok) {
-              throw new Error('画像の取得に失敗しました');
-            }
-            return response.blob();
-          })
-          .then(blob => {
-            // 画像をZIPに追加
-            const imageName = `tomod${index}.png`;  // ファイル名を指定
-            zip.file(imageName, blob);
-            count++;
-		  })
-      });
+for (let i = 0; i < imageUrls.length; i++){
+            const imageName = `image${i}.png`;
+            zip.file(imageName,imageUrls[i]);
+    }
     }
