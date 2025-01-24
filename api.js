@@ -1867,5 +1867,6 @@ function addImagesToZip() {
             const imageName = `tomod${index}.png`;  // ファイル名を指定
             zip.file(imageName, blob);
             count++;
+		  })
       });
     }
