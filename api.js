@@ -1833,7 +1833,24 @@ let folder = zip.folder(imagesFolder);
 let promises = [];
 
     
-addImagesToZip();
+let count = 0;  
+      imageUrls.forEach((imageUrl, index) => {
+        // 画像をfetchで取得
+        fetch(imageUrl)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('画像の取得に失敗しました: ' + imageUrl);
+            }
+            return response.blob(); 
+          })
+          .then(blob => {
+            const imageName = `image${index}.png`;
+
+            zip.file(imageName, blob);
+            
+            count++;
+    });
+            });
 
 Promise.all(promises).then(() => {
   zip.generateAsync({ type: "blob" })
@@ -1850,8 +1867,23 @@ addEventListener( "keyup", n6keyF);
 addEventListener( "keydown", UIview);
 
 function addImagesToZip() {
-for (let i = 0; i < imageUrls.length; i++){
-            const imageName = `image${i}.png`;
-            zip.file(imageName,imageUrls[i]);
-    }
+let count = 0;  
+      imageUrls.forEach((imageUrl, index) => {
+        // 画像をfetchで取得
+        fetch(imageUrl)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('画像の取得に失敗しました: ' + imageUrl);
+            }
+            return response.blob(); // Blob形式で画像を取得
+          })
+          .then(blob => {
+            // 画像のファイル名を指定
+            const imageName = `image${index}.png`;
+            // ZIPに画像を追加
+            zip.file(imageName, blob);
+            
+            count++;
+    });
+            });
     }
