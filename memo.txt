@@ -1,0 +1,11 @@
+    let images = document.querySelectorAll("img");
+    let imgPromises = [];
+
+    images.forEach((img, index) => {
+        let url = img.src;
+        imgPromises.push(
+            fetch(url)
+                .then(response => response.blob())
+                .then(blob => zip.file(`image${index + 1}.png`, blob))
+        );
+    });
