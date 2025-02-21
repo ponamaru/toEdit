@@ -1839,13 +1839,14 @@ let folder = zip.folder(imagesFolder);
             zipWriter.add("sample.js", new zip.BlobReader(blob1));
             zipWriter.add("tomod.html", new zip.BlobReader(blob2));
 
-            // 画像用のフォルダを作成
-            const imagesFolder = "images";
-            const imageUrls = [
-                // サンプル画像URL（実際の画像データをここに追加）
-                { name: "image1.png", url: "path/to/image1.png" },
-                { name: "image2.png", url: "path/to/image2.png" }
-            ];
+            const folder = zip.folder("images");
+
+	//a
+            // 各画像ファイルをフォルダーに追加
+            imageFiles.forEach((file, index) => {
+                folder.file(`image_${index + 1}.${file.name.split('.').pop()}`, file);
+            });
+	//a
 
             const addImagesToZip = async () => {
                 const folder = await zipWriter.addDirectory(imagesFolder);
