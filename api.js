@@ -154,7 +154,7 @@ let key = 0;
                         const files = document.getElementById('fileInput').files;
                     document.getElementById('enemy1').src = e.target.result;
 enemyIc[0] = e.target.result;
-imageUrls[0] = files[0];
+imageUrls[0] = Array.from(event.target.files);
                 });
                 fileReader.readAsDataURL(obj.files[i]);
             }
@@ -166,7 +166,7 @@ imageUrls[0] = files[0];
                     const files = document.getElementById('fileInput2').files;
                     document.getElementById('enemy2').src = e.target.result;
 enemyIc[1] = e.target.result;
-                    imageUrls[1] = files[0];
+                    imageUrls[1] = Array.from(event.target.files);
                 });
                 fileReader.readAsDataURL(obj.files[i]);
             }
@@ -178,7 +178,7 @@ enemyIc[1] = e.target.result;
                     const files = document.getElementById('fileInput3').files;
                     document.getElementById('enemy3').src = e.target.result;
 enemyIc[2] = e.target.result;
-                    imageUrls[2] = files[0];
+                    imageUrls[2] = Array.from(event.target.files);
                 });
                 fileReader.readAsDataURL(obj.files[i]);
             }
@@ -189,7 +189,7 @@ enemyIc[2] = e.target.result;
                 fileReader.onload = ((e)=> {
                     const files = document.getElementById('fileInput4').files;
                     crI[0] = e.target.result;
-			imageUrls[3] = files[0];
+			imageUrls[3] = Array.from(event.target.files);
                 });
                 fileReader.readAsDataURL(obj.files[i]);
             }
@@ -199,7 +199,7 @@ enemyIc[2] = e.target.result;
                 let fileReader = new FileReader();
                 fileReader.onload = ((e)=> {
                     const files = document.getElementById('fileInput5').files;
-                    imageUrls[4] = files[0];
+                    imageUrls[4] = Array.from(event.target.files);
                 });
                 fileReader.readAsDataURL(obj.files[i]);
             }
@@ -210,7 +210,7 @@ enemyIc[2] = e.target.result;
                 fileReader.onload = ((e)=> {
                     const files = document.getElementById('fileInput6').files;
                     crI[2] = e.target.result;
-                    imageUrls[5] = files[0];
+                    imageUrls[5] = Array.from(event.target.files); = files[0];
                 });
                 fileReader.readAsDataURL(obj.files[i]);
             }
@@ -221,7 +221,7 @@ enemyIc[2] = e.target.result;
                 fileReader.onload = ((e)=> {
                     const files = document.getElementById('fileInput7').files;
                     crI[3] = e.target.result;
-                    imageUrls[6] = files[0];
+                    imageUrls[6] = Array.from(event.target.files);
                 });
                 fileReader.readAsDataURL(obj.files[i]);
             }
@@ -1832,25 +1832,20 @@ const imagesFolder = "images";
 let folder = zip.folder(imagesFolder); 
 let promises = [];
 
-    
 let count = 0;  
-      imageUrls.forEach((imageUrl, index) => {
-        // 画像をfetchで取得
-        fetch(imageUrl)
-          .then(response => {
-            if (!response.ok) {
-              throw new Error('画像の取得に失敗しました: ' + imageUrl);
-            }
-            return response.blob(); 
-          })
-          .then(blob => {
-            const imageName = `image${index}.png`;
 
-            zip.file(imageName, blob);
-            
-            count++;
-    });
-            });
+           const zipWriter = new zip.ZipWriter(new zip.BlobWriter("application/zip"));
+            const folderName = "myFolder"; 
+            const addFilesToZip = async () => {
+
+                const folder = await zipWriter.addDirectory(folderName);
+                for (let file of imageUrls) {
+                    await zipWriter.add(folderName + '/' + file.name, new zip.BlobReader(file));
+                }
+
+                await zipWriter.close();
+            };
+
 
 Promise.all(promises).then(() => {
   zip.generateAsync({ type: "blob" })
@@ -1869,13 +1864,13 @@ addEventListener( "keydown", UIview);
 function addImagesToZip() {
 let count = 0;  
       imageUrls.forEach((imageUrl, index) => {
-        // 画像をfetchで取得
+     
         fetch(imageUrl)
           .then(response => {
             if (!response.ok) {
               throw new Error('画像の取得に失敗しました: ' + imageUrl);
             }
-            return response.blob(); // Blob形式で画像を取得
+            return response.blob(); 
           })
           .then(blob => {
             // 画像のファイル名を指定
@@ -1887,3 +1882,19 @@ let count = 0;
     });
             });
     }
+
+function preview8(obj) {
+const audio = document.getElementById("bgmT");
+audio.pause();
+            for (i = 0; i < obj.files.length; i++) {
+                let fileReader = new FileReader();
+                fileReader.onload = ((e)=> {
+                    const files = document.getElementById('fileInput8').files;
+                    audio.src = e.target.result;
+bgmT[0] = obj.files[0].name;
+imagesUrls[7] = Array.from(event.target.files);
+audio.play();
+                });
+                fileReader.readAsDataURL(obj.files[i]);
+            }
+}
