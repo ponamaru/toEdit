@@ -262,7 +262,7 @@ body {
 #enemy1 {
     	position: absolute;
     top: 250;
-	left: 200;
+	left: 600;
 }
 #enemy2 {
     	position: absolute;
@@ -378,7 +378,8 @@ var skillEffect = ["HP吸収","回復","敵の攻撃力ダウン","敵1体にこ
 var skillMp = [5,5,5,5,5,5,null];
 var skillEffectL = [0,0,0,0];
 var skillEffectB = [20,20,20,20];
-
+var enemyGuard = [5,5,5,5];
+var friendGuard = [5,5,5,5];
 var skillIntro2 = ["スキル7","スキル8","スキル9","スキル10","スキル11","スキル12",null];
 var skillE2 = ["消費mp:5","消費mp:5","消費mp:5","消費mp:5","消費mp:5","スマホ取り上げ　mp:5",null];
 var skillEffect2 = ["敵1体にこうげき","回復","HP吸収","敵の攻撃力ダウン","味方の攻撃力アップ","消費mp:5",null];
@@ -407,8 +408,8 @@ var target = ["","","",""]
 var decide = 0;
 var nowtext = 0;
 var array = ["敵が現れた","どうする?","どうする?","行動した","たかしは","ゲームオーバー","勝利した"];
-var enemyName = ["スライム","スライム2","スライム3",null,null,null];
-var enemyHp = [100,100,100,null,null,null];
+var enemyName = ["スライム",null,null,null];
+var enemyHp = [100,null,null,null];
 var enemyId = ["enemy1","enemy2","enemy3",null];
 var y1 = 500;
 var selectOver = 1;
@@ -426,12 +427,15 @@ var fun = 0;
 var random = Math.floor( Math.random() * 31 ) + 0;
 var random2 = Math.floor( Math.random() * Cfriend ) + 0;
 var Cfriend = 2;
-var Cenemy = 3;
+var Cenemy = 1;
 var aiful = 0;
 var aiOver = 0;
 var bgm = false;
 var bgmT = ["dorakue9.m4a"];
 const nC = document.getElementById("area").innerText.replace(/\\n/g, "\n");  
+
+document.getElementById( 'enemy2' ).style.display = 'none';
+document.getElementById( 'enemy3' ).style.display = 'none';
 
 document.getElementById("enemy1").src = enemyIc[0];
 document.getElementById("enemy2").src = enemyIc[1];
@@ -443,10 +447,8 @@ audio.pause();
             for (i = 0; i < obj.files.length; i++) {
                 let fileReader = new FileReader();
                 fileReader.onload = ((e)=> {
-                    const files = document.getElementById('fileInput8').files;
                     audio.src = e.target.result;
 bgmT[0] = obj.files[0].name;
-imagesUrls[7] = files[0];
 audio.play();
                 });
                 fileReader.readAsDataURL(obj.files[i]);
@@ -579,8 +581,10 @@ if(friendMp[aiOver] < 1)friendMp[aiOver] = 0;
 if(friendHp[aiOver] > friendHb[aiOver])friendHp[aiOver] = friendHb[aiOver];
 if(friendMp[aiOver] > friendMb[aiOver])friendMp[aiOver] = friendMb[aiOver];
 
-if(selectfun === 4)document.getElementById("area").innerText = itemE[decide] + " 残り" + itemN[decide] + "個";
+if((selectfun === 4)&&(!document.getElementById( 'select' ).innerText.includes(enemyName[0]) === true))document.getElementById("area").innerText = itemE[decide] + " 残り" + itemN[decide] + "個";
 }
+
+if(document.getElementById( 'select' ).innerText.includes(enemyName[0]) === true)document.getElementById("area").innerText = null;
 
 let intervalI = setInterval(carsol, 1);
 
@@ -775,7 +779,14 @@ if((selectfun === 1)&&(attaker > 0)) {
 attaker -= 1;
 array[1] = friend[attaker] + "はどうする?";
 nulltype();
+if(action[attaker] === aiful4){
+itemN.splice(aiful3, 0, 0);
+itemIntro.splice(aiful3, 0, aiful4);
+itemE.splice(aiful3, 0, aiful5);
 }
+if(itemIntro.includes(action[attaker]) === true)itemN[itemIntro.indexOf(action[attaker])] += 1;
+}
+action[attaker] = null;
     if((selectfun === 2)||(selectfun === 3)||(selectfun === 4)){
                     y1 = 500;
     document.getElementById( 'triangle' ).style.top = y1;
@@ -901,7 +912,7 @@ typing('.typing-animation', array[nowtext]);
     }
 
 type();
- function b () {
+function b () {
 var key_code = event.keyCode;
 
 if(( key_code === 40 )&&((document.getElementById( 'select' ).innerText.includes(friend[0]) === true)||(document.getElementById( 'select' ).innerText.includes(enemyName[0]) === true))) {
@@ -1126,9 +1137,22 @@ document.getElementById( 'triangle' ).style.top = y1;
 
 
 
+
 function skillItemQTE () {
 if(selectfun === 4) {
 if((document.getElementById( 'select' ).innerText.includes(friend[0]) === true)||(document.getElementById( 'select' ).innerText.includes(enemyName[0]) === true)){
+
+itemN[itemIntro.indexOf(action[attaker])] -= 1;
+if(itemN[itemIntro.indexOf(action[attaker])] < 1) {
+aiful = itemIntro.indexOf(action[attaker]);
+aiful3 = itemIntro.indexOf(action[attaker]);
+aiful4 = itemIntro[itemIntro.indexOf(action[attaker])];
+aiful5 = itemE[itemIntro.indexOf(action[attaker])];
+itemN.splice( aiful,1 );
+itemIntro.splice( aiful,1 );
+itemE.splice( aiful,1 );
+}
+
 if(document.getElementById( 'select' ).innerText.includes(friend[0]) === true)target[attaker] = friend[decide];
 if(document.getElementById( 'select' ).innerText.includes(enemyName[0]) === true)target[attaker] = enemyName[decide];
 sc = false;         decide = 0;
@@ -1318,10 +1342,10 @@ trun();
 
 }
 
+
 function skillItem() {
 if(action[attaker].includes("アイテム1")){ 
 friendHp[friend.indexOf(target[attaker])] += 10;
-itemN[itemIntro.indexOf(action[attaker])] -= 1;
 array[4] += "\n" + target[attaker] + "のhpは10回復した";
 if(itemN[itemIntro.indexOf(action[attaker])] < 1) {
 aiful = itemIntro.indexOf(action[attaker]);
@@ -1332,7 +1356,6 @@ itemE.splice( aiful,1 );
 }
 if(action[attaker].includes("アイテム2")){ 
 friendMp[friend.indexOf(target[attaker])] += 10;
-itemN[itemIntro.indexOf(action[attaker])] -= 1;
 array[4] += "\n" + target[attaker] + "のmpは10回復した";
 if(itemN[itemIntro.indexOf(action[attaker])] < 1) {
 aiful = itemIntro.indexOf(action[attaker]);
@@ -1386,6 +1409,10 @@ itemE.splice( aiful,1 );
 }
 }
 
+var aiful5 = "a";
+    var aiful4 = "a";
+var aiful3 = 0;
+
 
 function sct() {
 sc = true;
@@ -1419,6 +1446,4 @@ document.getElementById( 'triangleD' ).style.display = 'none';
 <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
 
 <script src="api.js"></script>
-
-
 </html>
