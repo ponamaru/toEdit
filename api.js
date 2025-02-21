@@ -1830,33 +1830,50 @@ zip.file("tomod.html",blob4);
 
 const imagesFolder = "images"; 
 let folder = zip.folder(imagesFolder); 
-let promises = [];
+          const zipWriter = new zip.ZipWriter(new zip.BlobWriter("application/zip"));
 
-let count = 0;  
+            // まず最初にサンプルファイルを追加
+            const blob1 = new Blob([blob3], { type: "application/javascript" });
+            const blob2 = new Blob([blob4], { type: "text/html" });
 
-           const zipWriter = new zip.ZipWriter(new zip.BlobWriter("application/zip"));
-            const folderName = "myFolder"; 
-            const addFilesToZip = async () => {
+            zipWriter.add("sample.js", new zip.BlobReader(blob1));
+            zipWriter.add("tomod.html", new zip.BlobReader(blob2));
 
-                const folder = await zipWriter.addDirectory(folderName);
-                for (let file of imageUrls) {
-                    await zipWriter.add(folderName + '/' + file.name, new zip.BlobReader(file));
-                }
+            // 画像用のフォルダを作成
+            const imagesFolder = "images";
+            const imageUrls = [
+                // サンプル画像URL（実際の画像データをここに追加）
+                { name: "image1.png", url: "path/to/image1.png" },
+                { name: "image2.png", url: "path/to/image2.png" }
+            ];
 
-                await zipWriter.close();
+            const addImagesToZip = async () => {
+                const folder = await zipWriter.addDirectory(imagesFolder);
+                let promises = [];
+                
+                imageUrls.forEach(file => {
+                    // 画像URLをBlobとして読み込み
+                    const imgBlob = fetch(file.url).then(res => res.blob());
+                    promises.push(
+                        imgBlob.then(blob => zipWriter.add(`${imagesFolder}/${file.name}`, new zip.BlobReader(blob)))
+                    );
+                });
+
+                await Promise.all(promises); // すべての画像の追加が終わったらZIPを閉じる
             };
 
-
-Promise.all(promises).then(() => {
-  zip.generateAsync({ type: "blob" })
-    .then(function(content) {
-
-      var link = document.createElement("a");
-      link.href = URL.createObjectURL(content);
-      link.download = "images.zip"; 
-      link.click();
-    });
-});        });  
+            addImagesToZip().then(() => {
+                zipWriter.close().then(() => {
+                    zipWriter.getData().then(function(blob) {
+                        // ダウンロードリンクを作成してクリックする
+                        const link = document.createElement("a");
+                        link.href = URL.createObjectURL(blob);
+                        link.download = "images.zip"; // ダウンロードするZIPファイル名
+                        link.click();
+                    });
+                });
+            });
+        });
 
 addEventListener( "keyup", n6keyF);
 addEventListener( "keydown", UIview);
