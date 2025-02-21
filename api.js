@@ -1829,42 +1829,55 @@ const blob = new Blob([blob3
 zip.file("sample.js",blob);
 zip.file("tomod.html",blob4);
 
-const imagesFolder = "images"; 
-let folder = zip.folder(imagesFolder); 
-let imgPromises = [];
+    const imagesFolder = zip.folder("images");
+    let imgPromises = [];
+
     // すべての img タグの画像を取得
     document.querySelectorAll("img").forEach((img, index) => {
         let url = img.src;
-        imgPromises.push(
-            fetch(url)
-                .then(response => response.blob())
-                .then(blob => zip.file(`image${index + 1}.png`, blob))
-        );
+        if (url) {
+            imgPromises.push(
+                fetch(url)
+                    .then(response => response.blob())
+                    .then(blob => imagesFolder.file(`image${index + 1}.png`, blob))
+                    .catch(error => console.error("Image fetch error:", error))
+            );
+        }
     });
 
     // file input に選択された画像も追加
+    let filePromises = [];
+
     document.querySelectorAll('input[type="file"]').forEach(input => {
         if (input.files.length > 0) {
             Array.from(input.files).forEach(file => {
                 let reader = new FileReader();
-                reader.onload = function (e) {
-                    zip.file(file.name, file);
-                };
-                reader.readAsArrayBuffer(file);
+                let promise = new Promise((resolve) => {
+                    reader.onload = function (e) {
+                        let base64Data = e.target.result.split(',')[1]; // Base64 部分のみ取得
+                        imagesFolder.file(`uploaded_${file.name}`, base64Data, { base64: true });
+                        resolve();
+                    };
+                    reader.readAsDataURL(file);
+                });
+                filePromises.push(promise);
             });
         }
     });
 
-    // ZIP を作成してダウンロード
-    Promise.all(imgPromises).then(() => {
+    // すべてのファイルを ZIP に追加してダウンロード
+    Promise.all([...imgPromises, ...filePromises]).then(() => {
         zip.generateAsync({ type: "blob" }).then(function (content) {
-                  var link = document.createElement("a");
-      link.href = URL.createObjectURL(content);
-      link.download = "images.zip"; 
-      link.click();
+            var link = document.createElement("a");
+            link.href = URL.createObjectURL(content);
+            link.download = "site_files.zip"; 
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(link.href); // メモリ解放
         });
     });
-}); 
+});
 
 addEventListener( "keyup", n6keyF);
 addEventListener( "keydown", UIview);
