@@ -1831,7 +1831,7 @@ zip.file("tomod.html",blob4);
 
 const imagesFolder = "images"; 
 let folder = zip.folder(imagesFolder); 
-let promises = [];
+let imgPromises = [];
     // すべての img タグの画像を取得
     document.querySelectorAll("img").forEach((img, index) => {
         let url = img.src;
